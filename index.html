@@ -10,43 +10,51 @@
 </head>
 
 <body>
-<!-- HEADER CONTAINS LINK TO HIGH SCORES AND TIMER-->
+    <!-- HEADER CONTAINS LINK TO HIGH SCORES AND TIMER-->
     <header>
         <div id="view-high-scores">View high scores</div>
         <div id="timer">timer</div>
     </header>
 
-<!--MAIN CONTENT OF PAGE FOR QUESTIONS/ANSWERS/SCORE WHEN FINISHED-->
+    <!--MAIN CONTENT OF PAGE FOR QUESTIONS/ANSWERS/SCORE WHEN FINISHED-->
     <main class="content" id="content">
 
-    <!--INTRO PAGE-->    
-        <section id="into">
+        <!--INTRO PAGE-->
+        <section id="intro">
             <h2>Coding Quiz Challenge</h2>
             <p>Try to answer the following code-related questions within the tiime limit. Keep in mind that incorrect
                 answers will penalize your score/time by ten seconds! </p>
             <button class="btn" id="start-btn">Start Quiz</button>
         </section>
 
-    <!--Q&A-->
-        <section id="q-and-a"></section>
-        <h2 id="question">Question</h2>
-        <div id="answer-btns">Answers</div>
-        <div id="result">
-            <hr>
-        </div>
+        <!--Q&A-->
+        <section id="q-and-a">
+            <h2 id="question">Question</h2>
+            <div id="answer-btns">Answers</div>
+            <div id="result">
+                <hr>
+            </div>
+        </section>
 
-    <!--ALL DONE-->    
-        <section id="all-done"></section>
-        <h2>All done!</h2>
-        <span id="your-score">youre score is</span>
-        <form id="initials">
-            <label>Enter your initials:</label>
-            <input type="text" name="initials" placeholder="type here">
-            <button class="btn" id="submit-initials">Submit</button>
-        </form>
-    
-    <!--HIGH SCORES-->
+        <!--ALL DONE-->
+        <section id="all-done">
+            <h2>All done!</h2>
+            <span id="your-score">youre score is</span>
+            <form id="initials">
+                <label>Enter your initials:</label>
+                <input type="text" name="initials" placeholder="type here">
+                <button class="btn" id="submit-initials">Submit</button>
+            </form>
+        </section>
+
+        <!--HIGH SCORES-->
         <section id="high-scores">
+            <h2>High Scores</h2>
+            <ol class="winners" id="winners">
+                <li>Houston 99</li>
+            </ol>
+            <button class="btn" id="go-back">Go Back</button>
+            <button class="btn" id="clear-hs">Clear High Scores</button>
 
         </section>
 
