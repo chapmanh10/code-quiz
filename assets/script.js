@@ -1,22 +1,37 @@
-var questionAandAnswersPage = document.getElementById("q-and-a")
-var highScores = document.getElementById("high-scores")
+var questionAandAnswersPage = document.getElementById("q-and-a");
+var highScoresPage = document.getElementById("high-scores");
 var introPage = document.getElementById("intro");
+var allDonePage = document.getElementById("all-done");
 var startbtn = document.getElementById("start-btn");
-var startTime = 60;
+var startTime = 5;
+var timer = document.querySelector("#timer span");
+var timerInterval = null;
 
-
-var revealQuestions = function (event) {
+var revealQuestions = function () {
     introPage.classList.add("hidden");
     questionAandAnswersPage.classList.remove("hidden");
+};
+
+var revealAllDone = function () {
+    allDonePage.classList.remove("hidden");
+    questionAandAnswersPage.classList.add("hidden");
 }
 
-startbtn.addEventListener("click", startHandler);
+var revealHighScores = function () {
 
-var startHandler = function(){
+}
+
+var startHandler = function () {
     revealQuestions();
-    setInterval(intervalTick,1000)
-}
+    timerInterval = setInterval(intervalTick, 1000)
+};
 
-var intervalTick = function(){
-
-}
+var intervalTick = function () {
+    startTime--;
+    timer.textContent = startTime;
+    if (startTime <= 0) {
+        clearInterval(timerInterval)
+        revealAllDone();
+    }
+};
+startbtn.addEventListener("click", startHandler);
