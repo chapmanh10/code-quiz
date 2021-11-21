@@ -1,0 +1,21 @@
+* {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+:root {
+    --primary: rgb(212, 67, 169);
+    --secondary: rgb(68, 37, 141);
+    --tertiary: rgb(129, 90, 145);
+}
+
+#view-high-scores {
+    color: var(--primary)
+}
+
+header {
+    display: flex;
+    flex: auto;
+    justify-content: space-between;
+    padding: 15px;
+}
+
