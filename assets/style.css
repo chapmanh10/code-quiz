@@ -6,6 +6,7 @@
     --primary: rgb(212, 67, 169);
     --secondary: rgb(68, 37, 141);
     --tertiary: rgb(219, 186, 231);
+    --grey: rgb(95, 90, 90);
 }
 
 #view-high-scores {
@@ -19,7 +20,7 @@ header {
     padding: 15px;
 }
 
-#intro {
+.intro {
     display: flex;
     flex: auto;
     flex-wrap: wrap;
@@ -39,6 +40,15 @@ button {
     border: none;
 }
 
+button:hover {
+    box-shadow: 2px 2px var(--grey);
+    background-color: var(--primary);
+}
+
 .winners {
     background-color: var(--tertiary);
+}
+
+.hidden {
+    display: none;
 }

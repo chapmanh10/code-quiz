@@ -20,7 +20,7 @@
     <main class="content" id="content">
 
         <!--INTRO PAGE-->
-        <section id="intro">
+        <section id="intro" class="intro">
             <h2>Coding Quiz Challenge</h2>
             <p>Try to answer the following code-related questions within the tiime limit. Keep in mind that incorrect
                 answers will penalize your score/time by ten seconds! </p>
@@ -28,18 +28,20 @@
         </section>
 
         <!--Q&A-->
-        <section id="q-and-a">
+        <section id="q-and-a" class="hidden">
             <h2 id="question">Question</h2>
             <div id="answer-btns">Answers</div>
-            <div id="result">
+            <div id="result" class="hidden">
                 <hr>
+                <span>correct!
+                </span>
             </div>
         </section>
 
         <!--ALL DONE-->
-        <section id="all-done">
+        <section id="all-done" class="hidden">
             <h2>All done!</h2>
-            <span id="your-score">youre score is</span>
+            <span id="your-score">Your final score is</span>
             <form id="initials">
                 <label>Enter your initials:</label>
                 <input type="text" name="initials" placeholder="type here">
@@ -48,7 +50,7 @@
         </section>
 
         <!--HIGH SCORES-->
-        <section id="high-scores">
+        <section id="high-scores" class="hidden">
             <h2>High Scores</h2>
             <ol class="winners" id="winners">
                 <li>Houston 99</li>
