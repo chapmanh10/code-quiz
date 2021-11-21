@@ -2,10 +2,11 @@ var questionAandAnswersPage = document.getElementById("q-and-a");
 var highScoresPage = document.getElementById("high-scores");
 var introPage = document.getElementById("intro");
 var allDonePage = document.getElementById("all-done");
-var startbtn = document.getElementById("start-btn");
+var startBtn = document.getElementById("start-btn");
 var startTime = 5;
 var timer = document.querySelector("#timer span");
 var timerInterval = null;
+var initialsForm = document.getElementById("initials");
 
 var revealQuestions = function () {
     introPage.classList.add("hidden");
@@ -17,8 +18,12 @@ var revealAllDone = function () {
     questionAandAnswersPage.classList.add("hidden");
 }
 
-var revealHighScores = function () {
-
+var revealHighScores = function (event) {
+    console.log(event)
+    event.preventDefault()
+    allDonePage.classList.add("hidden");
+    introPage.classList.add("hidden");
+    highScoresPage.classList.remove("hidden");
 }
 
 var startHandler = function () {
@@ -34,4 +39,5 @@ var intervalTick = function () {
         revealAllDone();
     }
 };
-startbtn.addEventListener("click", startHandler);
+startBtn.addEventListener("click", startHandler);
+initialsForm.addEventListener("submit", revealHighScores)
