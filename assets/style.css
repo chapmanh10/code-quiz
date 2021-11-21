@@ -19,3 +19,22 @@ header {
     padding: 15px;
 }
 
+section {
+    display: flex;
+    flex: auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+}
+    
+main {
+    margin: 10% 20%;
+}
+
+button {
+    background-color: var(--secondary);
+    color: white;
+    border-radius: 5px;
+    padding: 8px 15px;
+    border: none;
+}
