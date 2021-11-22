@@ -64,3 +64,9 @@ button:hover {
 #answer-btns button{
     text-align: left;
 }
+
+#result {
+    color: var(--grey);
+    font-style: italic;
+    font-size: 32px;
+}

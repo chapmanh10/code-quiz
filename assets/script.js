@@ -22,7 +22,7 @@ var questionsArray = [
     {
         text: "The condition in an if / else statement is enclosed with _______",
         answers: [
-            "quotes", "curley braces", "parenthesis", "square brackets",
+            "1. quotes", "2. curley braces", "3. parenthesis", "4. square brackets",
         ],
         correctAnswer: 2
     },
@@ -30,7 +30,7 @@ var questionsArray = [
     {
         text: "Arrays in JavaScript can be used to store _______",
         answers: [
-            "numbers and strings", "booleans", "other arrays", "all of the above"
+            "1. numbers and strings", "2. booleans", "3. other arrays", "4. all of the above"
         ],
         correctAnswer: 3
     },
@@ -38,7 +38,7 @@ var questionsArray = [
     {
         text: "A very useful tool used during development for debugging and printing content to the debugger is:",
         answers: [
-            "JavaScript", "terminal/gitBash", "for loops", "console log",
+            "1. JavaScript", "2. terminal/gitBash", "3. for loops", "4. console log",
         ],
         correctAnswer: 3
     },
@@ -46,7 +46,7 @@ var questionsArray = [
     {
         text: "String values must be enclosed within _______ when being assigned variables",
         answers: [
-            "commas", "quotes", "curly braces", "square brackets",
+            "1. commas", "2. quotes", "3. curly braces", "4. square brackets",
         ],
         correctAnswer: 1
     }
@@ -58,6 +58,7 @@ var displayQuestions = function () {
     questionHeader.textContent = question.text;
 
     var answerButtonHolder = document.getElementById("answer-btns");
+    answerButtonHolder.innerHTML = " ";
 
     for (var i = 0; i < question.answers.length; i++) {
         var answerButton = document.createElement("button");
@@ -70,9 +71,23 @@ var displayQuestions = function () {
 }
 
 var evaluate = function (event) {
-    var selectedID = event.target.getAttribute("data-answer-id");
+    var selectedAnswer = event.target.getAttribute("data-answer-id");
     var correctAnswer = questionsArray[currentQuestion].correctAnswer;
-}
+    currentQuestion++;
+    var result = document.getElementById("result");
+        result.classList.remove("hidden");
+        
+    if (parseInt(selectedAnswer) === correctAnswer) {
+        result.textContent = "correct!"
+        displayQuestions();
+      
+    }
+    else {
+        startTime -=10
+        result.textContent = "incorrect!"
+        displayQuestions();
+    }
+};
 
 // REVEAL DIFFERENT PAGES
 var revealQuestions = function () {
@@ -102,7 +117,7 @@ var startHandler = function () {
 var intervalTick = function () {
     startTime--;
     timer.textContent = startTime;
-    if (startTime <= 0) {
+    if (startTime <= 0 || currentQuestion >= questionsArray.length) {
         clearInterval(timerInterval)
         revealAllDone();
     }
