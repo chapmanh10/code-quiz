@@ -7,7 +7,9 @@ var startTime = 5;
 var timer = document.querySelector("#timer span");
 var timerInterval = null;
 var initialsForm = document.getElementById("initials");
+var goBackBtn = document.getElementById("go-back");
 
+// REVEAL DIFFERENT PAGES
 var revealQuestions = function () {
     introPage.classList.add("hidden");
     questionAandAnswersPage.classList.remove("hidden");
@@ -19,13 +21,13 @@ var revealAllDone = function () {
 }
 
 var revealHighScores = function (event) {
-    console.log(event)
     event.preventDefault()
     allDonePage.classList.add("hidden");
     introPage.classList.add("hidden");
     highScoresPage.classList.remove("hidden");
 }
 
+// TIMER
 var startHandler = function () {
     revealQuestions();
     timerInterval = setInterval(intervalTick, 1000)
@@ -39,5 +41,16 @@ var intervalTick = function () {
         revealAllDone();
     }
 };
+
+var goBack = function () {
+    questionAandAnswersPage.classList.add("hidden");
+    highScoresPage.classList.add("hidden");
+    allDonePage.classList.add("hidden");
+    introPage.classList.remove("hidden");
+    startTime = 5;
+    timer.textContent = startTime;
+}
+
 startBtn.addEventListener("click", startHandler);
 initialsForm.addEventListener("submit", revealHighScores)
+goBackBtn.addEventListener("click", goBack)
