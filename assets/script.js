@@ -8,6 +8,50 @@ var timer = document.querySelector("#timer span");
 var timerInterval = null;
 var initialsForm = document.getElementById("initials");
 var goBackBtn = document.getElementById("go-back");
+var questionsArray = [
+    //QUESTION 1
+    {
+        question:"Commonly used data types do NOT include:",
+        answers: [
+            "strings", "boolean", "alerts", "numbers"
+        ],
+        correctAnswer: 2
+    },
+    // QUESTION 2
+    {
+        question:"The condition in an if / else statement is enclosed with _______",
+        answers: [
+            "quotes", "curley braces", "parenthesis", "square brackets",
+        ],
+        correctAnswer: 2
+    },
+    // QUESTION 3
+    {
+        question:"Arrays in JavaScript can be used to store _______",
+        answers: [
+            "numbers and strings", "booleans", "other arrays", "all of the above"
+        ],
+        correctAnswer: 3
+    },
+    // QUESTION 4
+    {
+        question:"A very useful tool used during development for debugging and printing content to the debugger is:",
+        answers: [
+            "JavaScript", "terminal/gitBash", "for loops", "console log",
+        ],
+        correctAnswer: 3
+    },
+    // QUESTION 5
+    {
+        question:"String values must be enclosed within _______ when being assigned variables",
+        answers: [
+            "commas", "quotes", "curly braces", "square brackets",
+        ],
+        correctAnswer: 1
+    }
+]
+
+
 
 // REVEAL DIFFERENT PAGES
 var revealQuestions = function () {
@@ -52,5 +96,6 @@ var goBack = function () {
 }
 
 startBtn.addEventListener("click", startHandler);
-initialsForm.addEventListener("submit", revealHighScores)
-goBackBtn.addEventListener("click", goBack)
+initialsForm.addEventListener("submit", revealHighScores);
+goBackBtn.addEventListener("click", goBack);
+
