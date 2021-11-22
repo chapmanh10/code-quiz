@@ -3,7 +3,7 @@ var highScoresPage = document.getElementById("high-scores");
 var introPage = document.getElementById("intro");
 var allDonePage = document.getElementById("all-done");
 var startBtn = document.getElementById("start-btn");
-var startTime = 5;
+var startTime = 60;
 var timer = document.querySelector("#timer span");
 var timerInterval = null;
 var initialsForm = document.getElementById("initials");
@@ -11,15 +11,15 @@ var goBackBtn = document.getElementById("go-back");
 var questionsArray = [
     //QUESTION 1
     {
-        question:"Commonly used data types do NOT include:",
+        text: "Commonly used data types do NOT include:",
         answers: [
-            "strings", "boolean", "alerts", "numbers"
+            "1. strings", "2. boolean", "3. alerts", "4. numbers"
         ],
         correctAnswer: 2
     },
     // QUESTION 2
     {
-        question:"The condition in an if / else statement is enclosed with _______",
+        text: "The condition in an if / else statement is enclosed with _______",
         answers: [
             "quotes", "curley braces", "parenthesis", "square brackets",
         ],
@@ -27,7 +27,7 @@ var questionsArray = [
     },
     // QUESTION 3
     {
-        question:"Arrays in JavaScript can be used to store _______",
+        text: "Arrays in JavaScript can be used to store _______",
         answers: [
             "numbers and strings", "booleans", "other arrays", "all of the above"
         ],
@@ -35,7 +35,7 @@ var questionsArray = [
     },
     // QUESTION 4
     {
-        question:"A very useful tool used during development for debugging and printing content to the debugger is:",
+        text: "A very useful tool used during development for debugging and printing content to the debugger is:",
         answers: [
             "JavaScript", "terminal/gitBash", "for loops", "console log",
         ],
@@ -43,13 +43,28 @@ var questionsArray = [
     },
     // QUESTION 5
     {
-        question:"String values must be enclosed within _______ when being assigned variables",
+        text: "String values must be enclosed within _______ when being assigned variables",
         answers: [
             "commas", "quotes", "curly braces", "square brackets",
         ],
         correctAnswer: 1
     }
-]
+];
+
+var displayQuestions = function () {
+    var question = questionsArray[0]
+    var questionHeader = document.getElementById("question");
+    questionHeader.textContent = question.text;
+
+    var answerButtonHolder = document.getElementById("answer-btns");
+
+    for (var i = 0; i < question.answers.length; i++) {
+        var answerButton = document.createElement("button");
+        answerButton.textContent = question.answers[i];
+        answerButtonHolder.appendChild(answerButton);
+    }
+
+}
 
 
 
@@ -57,6 +72,7 @@ var questionsArray = [
 var revealQuestions = function () {
     introPage.classList.add("hidden");
     questionAandAnswersPage.classList.remove("hidden");
+    displayQuestions();
 };
 
 var revealAllDone = function () {
