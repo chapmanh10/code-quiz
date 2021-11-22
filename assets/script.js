@@ -8,6 +8,7 @@ var timer = document.querySelector("#timer span");
 var timerInterval = null;
 var initialsForm = document.getElementById("initials");
 var goBackBtn = document.getElementById("go-back");
+var currentQuestion = 0;
 var questionsArray = [
     //QUESTION 1
     {
@@ -52,7 +53,7 @@ var questionsArray = [
 ];
 
 var displayQuestions = function () {
-    var question = questionsArray[0]
+    var question = questionsArray[currentQuestion]
     var questionHeader = document.getElementById("question");
     questionHeader.textContent = question.text;
 
@@ -61,12 +62,17 @@ var displayQuestions = function () {
     for (var i = 0; i < question.answers.length; i++) {
         var answerButton = document.createElement("button");
         answerButton.textContent = question.answers[i];
+        answerButton.setAttribute("data-answer-id", i)
+        answerButton.addEventListener("click", evaluate);
         answerButtonHolder.appendChild(answerButton);
     }
 
 }
 
-
+var evaluate = function (event) {
+    var selectedID = event.target.getAttribute("data-answer-id");
+    var correctAnswer = questionsArray[currentQuestion].correctAnswer;
+}
 
 // REVEAL DIFFERENT PAGES
 var revealQuestions = function () {
