@@ -9,6 +9,7 @@ var timerInterval = null;
 var initialsForm = document.getElementById("initials");
 var goBackBtn = document.getElementById("go-back");
 var currentQuestion = 0;
+var currentScore = 0;
 var questionsArray = [
     //QUESTION 1
     {
@@ -79,6 +80,7 @@ var evaluate = function (event) {
         
     if (parseInt(selectedAnswer) === correctAnswer) {
         result.textContent = "correct!"
+        currentScore += 10;
         displayQuestions();
       
     }
@@ -99,6 +101,8 @@ var revealQuestions = function () {
 var revealAllDone = function () {
     allDonePage.classList.remove("hidden");
     questionAandAnswersPage.classList.add("hidden");
+    var yourScore = document.getElementById("your-score");
+    yourScore.textContent = currentScore;
 }
 
 var revealHighScores = function (event) {
@@ -106,6 +110,12 @@ var revealHighScores = function (event) {
     allDonePage.classList.add("hidden");
     introPage.classList.add("hidden");
     highScoresPage.classList.remove("hidden");
+    var winnerInitials = event.target.elements.initials.value;
+    var winners = document.getElementById("winners");
+    var winner = document.createElement("li");
+    winner.textContent = winnerInitials + " " + currentScore;
+    winners.appendChild(winner);
+    
 }
 
 // TIMER
