@@ -13,6 +13,11 @@
     color: var(--primary)
 }
 
+#view-high-scores:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 header {
     display: flex;
     flex: auto;
@@ -43,6 +48,7 @@ button {
 button:hover {
     box-shadow: 2px 2px var(--grey);
     background-color: var(--primary);
+    cursor: pointer;
 }
 
 .winners {

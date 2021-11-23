@@ -10,6 +10,8 @@ var initialsForm = document.getElementById("initials");
 var goBackBtn = document.getElementById("go-back");
 var currentQuestion = 0;
 var currentScore = 0;
+var winners = document.getElementById("winners");
+var viewHighScores = document.getElementById("view-high-scores");
 var questionsArray = [
     //QUESTION 1
     {
@@ -60,7 +62,7 @@ var displayQuestions = function () {
 
     var answerButtonHolder = document.getElementById("answer-btns");
     answerButtonHolder.innerHTML = " ";
-
+    winners.textContent = "";
     for (var i = 0; i < question.answers.length; i++) {
         var answerButton = document.createElement("button");
         answerButton.textContent = question.answers[i];
@@ -76,18 +78,32 @@ var evaluate = function (event) {
     var correctAnswer = questionsArray[currentQuestion].correctAnswer;
     currentQuestion++;
     var result = document.getElementById("result");
-        result.classList.remove("hidden");
-        
+    var isLastQestion = questionsArray.length === currentQuestion + 1;
+    result.classList.remove("hidden");
+
     if (parseInt(selectedAnswer) === correctAnswer) {
         result.textContent = "correct!"
         currentScore += 10;
-        displayQuestions();
-      
+        if (isLastQestion) {
+            startTime = 1;
+            revealAllDone();
+
+        }
+        else {
+            displayQuestions();
+        }
+
     }
     else {
-        startTime -=10
+        startTime -= 10
         result.textContent = "incorrect!"
-        displayQuestions();
+        if (isLastQestion) {
+            startTime = 1;
+            revealAllDone();
+        }
+        else {
+            displayQuestions();
+        }
     }
 };
 
@@ -105,17 +121,81 @@ var revealAllDone = function () {
     yourScore.textContent = currentScore;
 }
 
-var revealHighScores = function (event) {
-    event.preventDefault()
+var revealHighScores = function (highScores) {
+    var clearBtn = document.getElementById("clear-hs");
+    clearBtn.addEventListener("click", clearHighScoresDOM);
     allDonePage.classList.add("hidden");
     introPage.classList.add("hidden");
     highScoresPage.classList.remove("hidden");
-    var winnerInitials = event.target.elements.initials.value;
-    var winners = document.getElementById("winners");
-    var winner = document.createElement("li");
-    winner.textContent = winnerInitials + " " + currentScore;
-    winners.appendChild(winner);
     
+    for (let index = 0; index < highScores.length; index++) {
+
+        var li = document.createElement('li');
+
+        li.textContent = highScores[index].initials + " " + highScores[index].score;
+
+        winners.appendChild(li);
+    }
+}
+
+var submitInitialsHandler = function (event) {
+    event.preventDefault()
+    var winnerInitials = event.target.elements.initials.value;
+    var savedWinners = rankScores(winnerInitials);
+    revealHighScores(savedWinners);
+};
+
+// VIEW HIGH SCORE HANDLER
+var viewHighScoresHandler = function () {
+    var scores = getScores();
+    revealHighScores(scores);
+};
+
+// CLEAR SCORES DOM
+var clearHighScoresDOM = function () {
+    winners.textContent = "";
+    clearScores();
+};
+
+// CLEAR SCORES
+var clearScores = function () {
+    localStorage.clear()
+};
+
+// SET VALUE TO LOCAL STORAGE
+var saveScores = function (winners) {
+    localStorage.setItem("winners", JSON.stringify(winners))
+};
+
+// GET VALUE FROM LOCAL STORAGE
+var getScores = function () {
+    var winners = localStorage.getItem("winners")
+    if (winners === null) {
+        return [];
+    }
+    else {
+        return JSON.parse(winners);
+    }
+
+}
+
+// RANK SCORE LIST
+var rankScores = function (initials) {
+    var savedScores = getScores();
+    var scoreObject = {
+        initials,
+        score: currentScore
+    }
+
+    if (savedScores.length === 0) {
+        saveScores([scoreObject])
+        return [scoreObject]
+    }
+    else {
+        savedScores.push(scoreObject);
+        saveScores(savedScores);
+        return savedScores;
+    }
 }
 
 // TIMER
@@ -138,11 +218,13 @@ var goBack = function () {
     highScoresPage.classList.add("hidden");
     allDonePage.classList.add("hidden");
     introPage.classList.remove("hidden");
-    startTime = 5;
+    startTime = 60;
     timer.textContent = startTime;
+    currentQuestion = 0;
+    currentScore = 0;
 }
 
 startBtn.addEventListener("click", startHandler);
-initialsForm.addEventListener("submit", revealHighScores);
+initialsForm.addEventListener("submit", submitInitialsHandler);
 goBackBtn.addEventListener("click", goBack);
-
+viewHighScores.addEventListener("click", viewHighScoresHandler);
