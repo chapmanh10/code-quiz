@@ -127,6 +127,8 @@ var revealHighScores = function (highScores) {
     allDonePage.classList.add("hidden");
     introPage.classList.add("hidden");
     highScoresPage.classList.remove("hidden");
+
+    winners.textContent = "";
     
     for (let index = 0; index < highScores.length; index++) {
 
